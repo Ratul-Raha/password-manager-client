@@ -212,7 +212,10 @@ const Sidebar = () => {
         paper: classes.drawerPaper,
       }}
     >
-      <div className={classes.toolbar} />
+      <div className={classes.toolbar} style={{marginTop:"-45px"}} />
+      <Typography variant="h5" style={{marginLeft:"5px"}}>
+        Password Manager
+      </Typography>
       <ToastContainer />
       <List>
         <ListItem

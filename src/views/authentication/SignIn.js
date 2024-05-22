@@ -75,7 +75,7 @@ const SignIn = () => {
         <ToastContainer />
         <CardContent>
           <Typography variant="h5" component="h1" align="center">
-            AuthManager
+            Password Manager Lite
           </Typography>
           <Typography variant="h5" component="h1" align="center">
             Sign In
