@@ -7,8 +7,10 @@ import {
   Typography,
   Menu,
   MenuItem,
+  ListItemIcon
 } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -94,8 +96,12 @@ const Header = () => {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem>Profile Blank</MenuItem>
-              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              <MenuItem onClick={handleLogout}>
+                <ListItemIcon>
+                  <ExitToAppIcon fontSize="small" />
+                </ListItemIcon>
+                Logout
+              </MenuItem>
             </Menu>
           </div>
         </Toolbar>

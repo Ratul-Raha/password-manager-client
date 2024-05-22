@@ -30,8 +30,7 @@ import { useEffect } from "react";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { Link, useParams } from "react-router-dom";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { NoEncryption } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexDirection: "column",
@@ -258,7 +257,7 @@ const Dashboard = () => {
     const response = await axios
       .post(`http://localhost:5000/api/users/add-item`, formData)
       .then((response) => {
-        setData(response.data.data)
+        setData(response.data.data);
         toast.success("Successfully added");
         setFormData({
           name: "",
@@ -275,9 +274,6 @@ const Dashboard = () => {
       .catch((error) => {
         console.log(error);
       });
-      
-
-      
   };
 
   const handleCopyPassword = (password) => {
@@ -330,6 +326,13 @@ const Dashboard = () => {
       >
         Export CSV
       </Button>
+      {/* Conditionally render No Items Available icon */}
+      {data.length === 0 && (
+        <div style={{ textAlign: "center" }}>
+          <NoEncryption style={{ fontSize: 100, color: "gray" }} />
+          <Typography variant="h6">No Items Available</Typography>
+        </div>
+      )}
       {isLoading ? (
         <div
           style={{
@@ -408,9 +411,9 @@ const Dashboard = () => {
                 />
               </div>
               <div style={{ display: "flex", justifyContent: "flex-end" }}>
-              <IconButton size="small">
-                    <VisibilityIcon onClick={() => itemClick(item._id)}/>
-                  </IconButton>
+                <IconButton size="small">
+                  <VisibilityIcon onClick={() => itemClick(item._id)} />
+                </IconButton>
                 <Link to={{ pathname: `/edit-item/${item._id}` }}>
                   <IconButton size="small">
                     <EditIcon />

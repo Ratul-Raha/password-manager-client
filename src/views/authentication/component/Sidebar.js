@@ -15,7 +15,14 @@ import { Link } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import FolderIcon from "@material-ui/icons/Folder";
-import { Modal, TextField, Button, Typography, Box, IconButton } from "@material-ui/core";
+import {
+  Modal,
+  TextField,
+  Button,
+  Typography,
+  Box,
+  IconButton,
+} from "@material-ui/core";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
@@ -78,7 +85,6 @@ const Sidebar = () => {
   };
 
   const updateFolder = async () => {
-
     try {
       const response = await axios.post(
         "http://localhost:5000/api/users/update-folder",
@@ -90,7 +96,7 @@ const Sidebar = () => {
       );
       if ((response.status = 200)) toast.success("Folder updated");
       console.log(response);
-      setFolders(response.data.folders)
+      setFolders(response.data.folders);
       setEditModalOpen(false);
       setEditFolderName("");
       setButtonDisabled(false);
@@ -98,19 +104,17 @@ const Sidebar = () => {
       console.log(error.response.data); // handle error response
       setButtonDisabled(false);
     }
-
-
-  }
+  };
 
   const handleEditSubmit = async (e) => {
-      e.preventDefault();
-      updateFolder();
-  }
+    e.preventDefault();
+    updateFolder();
+  };
 
   const handleEdit = async (editFolderName) => {
-      setEditModalOpen(true)
-      setEditFolderName(editFolderName);
-      setPreviousFolderName(editFolderName);
+    setEditModalOpen(true);
+    setEditFolderName(editFolderName);
+    setPreviousFolderName(editFolderName);
   };
 
   const handleDelete = async (folderName) => {
@@ -200,7 +204,6 @@ const Sidebar = () => {
     setEditFolderName(e.target.value);
   };
 
-
   return (
     <Drawer
       className={classes.drawer}
@@ -232,7 +235,7 @@ const Sidebar = () => {
         </ListItem>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <button
+            <div
               onClick={handleOpenModal}
               style={{
                 border: "none",
@@ -245,19 +248,23 @@ const Sidebar = () => {
               <ListItem
                 button
                 className={classes.nested}
-                style={{ paddingLeft: 80 }}
+                style={{ paddingLeft: "2%" }}
               >
-                <AddIcon />
-                <ListItemText primary="New Folder" />
+                <div
+                  style={{ width: "100%", paddingLeft: "10%", display: "flex" }}
+                >
+                  <AddIcon />
+                  <ListItemText primary="New Folder" />
+                </div>
               </ListItem>
-            </button>
+            </div>
             {folders.map((folder) => {
               const isMatch = folder.folderName === selectedFolderName;
               return (
                 <ListItem
                   button
                   className={classes.nested}
-                  style={{ paddingLeft: 80 }}
+                  style={{ paddingLeft: "10%" }}
                   key={folder.folderName}
                   selected={isMatch}
                 >
@@ -285,6 +292,7 @@ const Sidebar = () => {
             })}
           </List>
         </Collapse>
+
         <ListItem button onClick={handleClick2}>
           <ListItemIcon>
             <DashboardIcon />
@@ -297,7 +305,7 @@ const Sidebar = () => {
             <ListItem
               button
               className={classes.nested}
-              style={{ paddingLeft: 80 }}
+              style={{ paddingLeft: "80px" }}
             >
               <ArrowRightAltIcon />
               <ListItemText
@@ -308,7 +316,7 @@ const Sidebar = () => {
             <ListItem
               button
               className={classes.nested}
-              style={{ paddingLeft: 80 }}
+              style={{ paddingLeft: "80px" }}
             >
               <ArrowRightAltIcon />
               <ListItemText
@@ -354,7 +362,7 @@ const Sidebar = () => {
         <div className={classes.modal}>
           <Typography variant="h6">Edit Folder</Typography>
           <form onSubmit={handleEditSubmit}>
-            <Box my={2} style={{marginTop:"10px"}}>
+            <Box my={2} style={{ marginTop: "10px" }}>
               <TextField
                 label="Folder Name"
                 variant="outlined"
@@ -380,7 +388,6 @@ const Sidebar = () => {
           </form>
         </div>
       </Modal>
-
     </Drawer>
   );
 };
